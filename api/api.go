@@ -249,6 +249,9 @@ func App(opts ...options.AppOption) (*fiber.App, error) {
 	// images
 	app.Post("/v1/images/generations", auth, openai.ImageEndpoint(cl, options))
 
+	// assistants
+	app.Post("/v1/assistants", auth, openai.CreateAssistantEndpoint(cl, options))
+
 	if options.ImageDir != "" {
 		app.Static("/generated-images", options.ImageDir)
 	}
